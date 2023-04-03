@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+
 const aboutData = [
   {
     slug: 'about-app',
@@ -26,5 +27,3 @@ const SinglePage = () => {
   );
 };
 export default SinglePage;
-
-  

@@ -1,31 +1,32 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styles from '../styles/TodoItem.module.css';
-const TodoItem = ({itemProp, setTodos, delTodo, setUpdate}) => {
-const [editing, setEditing] = useState(false)
+/* eslint-disable react/prop-types */
+const TodoItem = ({
+  itemProp, setTodos, delTodo, setUpdate,
+}) => {
+  const [editing, setEditing] = useState(false);
 
-let viewMode = {};
-  let editMode = {};
+  const viewMode = {};
+  const editMode = {};
   if (editing) {
     viewMode.display = 'none';
   } else {
     editMode.display = 'none';
   }
 
-   const handlecheck = (id) => {
-    setTodos((prevState) => 
-        prevState.map((todo)=>{
-            if(todo.id === id) {
-                return {
-                    ...todo,
-                    completed: !todo.completed
-                }
-            }
-         return todo
-        })
-    )
-   }
+  const handlecheck = (id) => {
+    setTodos((prevState) => prevState.map((todo) => {
+      if (todo.id === id) {
+        return {
+          ...todo,
+          completed: !todo.completed,
+        };
+      }
+      return todo;
+    }));
+  };
 
-   const completedStyle = {
+  const completedStyle = {
     fontStyle: 'italic',
     color: '#595959',
     opacity: 0.4,
@@ -33,8 +34,8 @@ let viewMode = {};
   };
 
   const handleEditing = () => {
-    setEditing(true)
-  }
+    setEditing(true);
+  };
 
   const handleUpdatedDone = (event) => {
     if (event.key === 'Enter') {
@@ -42,28 +43,29 @@ let viewMode = {};
     }
   };
 
-    return (
-        <li className={styles.item}>
-        <div className={styles.content} style={viewMode}>  
-         <input type="checkbox"
+  return (
+    <li className={styles.item}>
+      <div className={styles.content} style={viewMode}>
+        <input
+          type="checkbox"
           checked={itemProp.completed}
           onChange={() => handlecheck(itemProp.id)}
-          />
-          <button onClick={handleEditing}>Edit</button>
-          <button onClick={() => delTodo(itemProp.id)}>Delete</button>
-          <span style={itemProp.completed ? completedStyle : null}>
+        />
+        <button type="button" onClick={handleEditing}>Edit</button>
+        <button type="button" onClick={() => delTodo(itemProp.id)}>Delete</button>
+        <span style={itemProp.completed ? completedStyle : null}>
           {itemProp.title}
-          </span>
-          </div>
-          <input
-            type="text"
-            value={itemProp.title}
-            className={styles.textInput}
-            style={editMode}
-            onChange={(e) => setUpdate(e.target.value, itemProp.id)}
-            onKeyDown={handleUpdatedDone}
-           />
-        </li>
-    )
-}
-export default TodoItem
+        </span>
+      </div>
+      <input
+        type="text"
+        value={itemProp.title}
+        className={styles.textInput}
+        style={editMode}
+        onChange={(e) => setUpdate(e.target.value, itemProp.id)}
+        onKeyDown={handleUpdatedDone}
+      />
+    </li>
+  );
+};
+export default TodoItem;
