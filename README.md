@@ -92,4 +92,4 @@ I would like to thank everyone!
 
 ## 📝 License
 
-This project is [MIT](./LICENSE.md) licensed.
+This project is [MIT](./LICENSE1.md) licensed.
